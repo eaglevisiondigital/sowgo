@@ -1,0 +1,4 @@
+[build]
+  publish = "public"
+# Static build: no npm dependencies or build command required.
+# Keep this site separate from Champion Life. No functions or DB connection.
