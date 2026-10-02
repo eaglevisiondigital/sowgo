@@ -3,7 +3,7 @@ name: Import approved SowGo website
 on:
   push:
     branches: [main]
-    paths: [.github/workflows/import-approved-site.yml]
+    paths: [.github/workflows/import-approved-site.yml, tools/restore-approved-site.py]
 
 permissions:
   contents: write
@@ -25,7 +25,6 @@ jobs:
       - name: Import the approved public website archive
         env:
           # One-time file-scoped download of the already-approved public site bundle.
-          # No GitHub, Netlify, database, donor, or private-source credentials are included.
           SOWGO_APPROVED_ARCHIVE_URL: 'https://sdmntprnorthcentralus.oaiusercontent.com/files/00000000-cc00-822f-bfd0-fa20cdc0ced1/raw?se=2026-10-02T06%3A36%3A56Z&sp=r&sv=2026-02-06&sr=b&scid=a0ff3161-5067-52b6-b10b-ce204de7e9bb&skoid=fae15675-a81a-44b5-9d8c-d8445a7c26a2&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-02T01%3A11%3A53Z&ske=2026-10-03T01%3A11%3A53Z&sks=b&skv=2026-02-06&sig=5RDoDZoGdIqbfBdXqnATy9cRbditpiYRPYwHe3nxZa4%3D'
         run: |
           printf '::add-mask::%s\n' "$SOWGO_APPROVED_ARCHIVE_URL"
