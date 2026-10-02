@@ -1,6 +1,6 @@
 [build]
   publish = "public"
-  command = "python3 tools/restore-approved-site.py"
-# Temporary checksum-verified recovery of the approved 27-file static website.
-# Restore the no-build configuration after public/ is committed to GitHub.
-# Keep this site separate from Champion Life. No functions or DB connection.
+  command = ""
+# The complete approved static website is committed in public/.
+# No package installation, archive download, functions, or database connection is required.
+# Keep this deployment separate from Champion Life.
