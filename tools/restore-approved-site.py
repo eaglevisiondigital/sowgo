@@ -1,9 +1,4 @@
-"""One-time, hash-verified recovery of the already-approved public website.
-
-The temporary archive URL lives ONLY in a site-scoped secret build variable.
-No website design, operational data, payment routing, or backend is changed.
-Remove the bootstrap build command after public/ is committed to GitHub.
-"""
+"""One-time, hash-verified recovery of the already-approved public website."""
 from __future__ import annotations
 import hashlib
 import io
@@ -12,8 +7,9 @@ from pathlib import Path, PurePosixPath
 import shutil
 import sys
 import tempfile
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 from zipfile import ZipFile
 
 SITE_ID = "6895fac9-d4bb-413f-a585-889442f212dd"
@@ -68,10 +64,15 @@ def main() -> int:
             parsed.username or parsed.password):
         raise ValueError("A valid temporary approved-archive build variable is required.")
     try:
-        with urlopen(source, timeout=45) as response:
+        request = Request(source, headers={"User-Agent": "SowGo-Approved-Website-Import/1.0"})
+        with urlopen(request, timeout=45) as response:
             payload = response.read(MAX_DOWNLOAD + 1)
-    except Exception:
-        raise RuntimeError("Approved archive transfer failed or link expired; URL withheld.") from None
+    except HTTPError as error:
+        raise RuntimeError(f"Approved archive transfer returned HTTP {error.code}; URL withheld.") from None
+    except URLError as error:
+        raise RuntimeError(f"Approved archive network failure: {type(error.reason).__name__}; URL withheld.") from None
+    except Exception as error:
+        raise RuntimeError(f"Approved archive transfer failure: {type(error).__name__}; URL withheld.") from None
     if len(payload) > MAX_DOWNLOAD:
         raise ValueError("Approved archive exceeds the allowed size.")
     restore(payload, destination)
