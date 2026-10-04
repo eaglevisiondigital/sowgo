@@ -45,3 +45,9 @@ https://deploy-preview-2--championlifechurch.netlify.app/outreach-partner.html?b
 This is a **shared direct form on acceptance preview**, not a production destination or popup. It uses the approved SowGo logo/navy/orange, guest fields and Submit & Continue to Sow, storing one SowGo-owned canonical intake. The existing outreach giving continuation is unchanged.
 
 Production main/SowGo.org remain unchanged. Do not merge this preview-target integration. Production rollout requires a separately authorized, deployed and tested shared production form URL and coordinated CTA cutover. No new form database, payment processing, DNS or merchant changes. Local checks prove only these six links changed; JS syntax passed. Hosted shared-form validation is tracked in Champion Life's package report.
+
+## Main synchronization — October 4, 2026
+
+Current main `650eb88e935c11ffa17a52922552941733fff8a8` is integrated by normal merge. The Partner-card conflict retains main's approved photos, overlay/logo, dimensions and current wording; only the intended five hrefs plus `partnerUrl` differ across the public website. Main's four card names remain Sow / Go / Pray / Partner. No production destination is activated.
+
+See [coordinated cutover plan](OUTREACH-PARTNER-CUTOVER-PLAN.md). Champion Life release isolation is **NEEDS ADDITIONAL ANALYSIS**, because shared People/Staff authorization and the operational staff/build dependency boundary need a selective production-baseline test. Do not merge all of PR #2 to obtain Outreach. Both PRs remain draft/unmerged; no production or backend changes are part of this sync.
