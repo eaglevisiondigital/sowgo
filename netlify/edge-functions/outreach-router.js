@@ -1,4 +1,4 @@
-import {fallbackHTML} from './router-page.js';
+import {fallbackHTML} from '../lib/router-page.js';
 export function safeDestination(value) {
  return typeof value==='string' && value.length<=2048 && /^https:\/\/(championlifefwb\.com|sowgo\.org)\/[A-Za-z0-9_/-]*$/.test(value) && !value.slice(8).includes('//') && !/\/go(\/|$)/.test(value);
 }
