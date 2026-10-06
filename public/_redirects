@@ -1,0 +1,6 @@
+# Permanent branded outreach QR router.
+# The physical QR encodes https://sowgo.org/go and never needs to change.
+# Current active campaign: Bessemer, Alabama 2026.
+# Use a temporary redirect so browsers/QR scanners do not cache a campaign destination permanently.
+/go    https://championlifefwb.com/bessemer/    302!
+/go/   https://championlifefwb.com/bessemer/    302!
