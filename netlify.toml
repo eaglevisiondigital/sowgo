@@ -2,5 +2,22 @@
   publish = "public"
   command = ""
 # The complete approved static website is committed in public/.
-# No package installation, archive download, functions, or database connection is required.
+# Main website remains static; only the scoped QR router uses an edge function.
 # Keep this deployment separate from Champion Life.
+
+# Only the permanent router/admin/config paths use the new edge handler.
+[[edge_functions]]
+function = "outreach-router"
+path = "/go"
+[[edge_functions]]
+function = "outreach-router"
+path = "/go/"
+[[edge_functions]]
+function = "outreach-router"
+path = "/go/admin"
+[[edge_functions]]
+function = "outreach-router"
+path = "/go/admin/*"
+[[edge_functions]]
+function = "outreach-router"
+path = "/api/outreach-router-config"
