@@ -2,6 +2,12 @@
 
 Build review only, October 16, 2026. No live cutover or deployment is authorized.
 
+## Isolated hosted acceptance correction — October 16, 2026
+
+Hosted review found the original Deploy Preview redirected `/register` to the production native origin. Unpublished deploy-preview/branch-deploy builds now copy the approved public artifact and replace only the two `/register` destination origins with `https://codex-huntsville-registration-2026--championlifechurch.netlify.app`. Path/campaign query, temporary 302 status, both slash forms, QR bytes and `/go` remain unchanged. Production still publishes the original `public/` artifact with no build command. The preview builder rejects production/unknown contexts and unexpected destination origins. No production routing change or merge is authorized.
+
+For a future campaign, update the two reviewed source destinations as described below and set the corresponding isolated preview origin in `tools/build-register-preview.mjs` before its acceptance. The permanent printed QR stays unchanged. Preview configuration is never used by production.
+
 - Permanent preregistration URL: **https://sowgo.org/register**.
 - `/register` and `/register/` use explicit temporary `302!` Netlify rules targeting `https://championlifefwb.com/outreach-register.html?campaign=huntsville-2026`.
 - `/go` and `/go/` remain byte-for-byte unchanged, targeting Bessemer's existing outreach decision/follow-up page. These routes are independent, never aliases.

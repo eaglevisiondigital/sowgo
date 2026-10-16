@@ -7,3 +7,4 @@ node_modules/
 !.env.example
 *.pem
 *.key
+preview-public/
