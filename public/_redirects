@@ -4,3 +4,8 @@
 # Use a temporary redirect so browsers/QR scanners do not cache a campaign destination permanently.
 /go    https://championlifefwb.com/bessemer/    302!
 /go/   https://championlifefwb.com/bessemer/    302!
+
+# Permanent preregistration QR router; independent from /go.
+# RELEASE CANDIDATE ONLY: merge/cutover requires native hosted acceptance and approval.
+/register    https://championlifefwb.com/outreach-register.html?campaign=huntsville-2026    302!
+/register/   https://championlifefwb.com/outreach-register.html?campaign=huntsville-2026    302!

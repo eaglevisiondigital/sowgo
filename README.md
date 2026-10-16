@@ -52,3 +52,7 @@ Preserve the navy/orange brand, original God's Love Compels Us hero, Sow termino
 - Complete hosted desktop/tablet/mobile browser checks and capture actual deployed screenshots before declaring full acceptance. Offline screenshots and local test reports are not live-site verification.
 
 Approved mockups, source delivery files, the pending photo patch, and local test evidence are retained with the project conversation. This documentation update changes no public website files, giving destination, backend configuration, or DNS record.
+
+## Huntsville preregistration router candidate — October 16, 2026
+
+The isolated `/register` release candidate and QR collateral are documented in [REGISTER-ROUTER.md](docs/REGISTER-ROUTER.md). Build review only; `/go` stays unchanged and no live cutover is authorized.
