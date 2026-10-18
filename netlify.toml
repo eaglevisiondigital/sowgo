@@ -4,3 +4,11 @@
 # The complete approved static website is committed in public/.
 # No package installation, archive download, functions, or database connection is required.
 # Keep this deployment separate from Champion Life.
+
+# Only unpublished candidates replace the preregistration origin with acceptance.
+[context.deploy-preview]
+  command = "node tools/build-register-preview.mjs"
+  publish = "preview-public"
+[context.branch-deploy]
+  command = "node tools/build-register-preview.mjs"
+  publish = "preview-public"
