@@ -1,8 +1,9 @@
-# General King Kind & discipleship entry — PREVIEW ONLY
-- SowGo public marketing entry proposal: `/king-kind/`.
-- Existing Champion Life candidate on Dave's local Mac is the authoritative Resource Registrant signup implementation; **DO NOT recreate or replace its auth, SQL, or privacy controls with this static preview**.
-- Local accepted candidate reference: `6d5730bf0034bbb138999ce8cab97ce150d525fe`; independent King Kind reader session correction frozen at `5c84a42f25aadfbf526baf0dbf1c9bcf0b5ec89a`.
-- Public data collection, general eligible book access, and redirects are purposely **not active** in this PR.
-- When the local candidate is safely transferred for review, connect the reviewed general registration UI to `/king-kind/` only after exact SHA, Resource Registrant separation, lessons 1–13 privacy, Supabase 2.118.0 integrity, auth/Storage and release readiness are independently verified.
-- Do not modify the Bessemer/Huntsville flows, private King Kind reader, course source, or production routing.
-- No merge or live deployment before separate release authorization; current provider-backed recovery and hosted acceptance gates remain NO-GO.
+# General King Kind & 6 AM Prayer entry — DRAFT PREVIEW ONLY
+- SowGo visitor entry: `/king-kind/`.
+- Current draft CTA sends visitors to Champion Life `/king-kind-signup.html`, prepared in [Champion Life draft PR #54](https://github.com/eaglevisiondigital/championlife/pull/54).
+- **Neither entry nor registration is live.** Do not merge this PR before the authenticated Champion Life backend is approved, deployed, and independently verified.
+- The public page collects no personal data and does not itself grant book access.
+- Original independently reviewed local Resource Registrant implementation: `6d5730bf0034bbb138999ce8cab97ce150d525fe` (local Mac; not pushed). Independently accepted reader-session correction: `5c84a42f25aadfbf526baf0dbf1c9bcf0b5ec89a`. Reconcile with the implementation in PR #54; do not deploy competing schemas or replace accepted privacy safeguards without review.
+- Do not change Bessemer/Huntsville registrations or existing SowGo `/register` and `/go` routes.
+- Keep this page `noindex,nofollow` until approved production activation.
+- No production migration, merge, release, account grant, email or payment action is authorized by these draft changes.
