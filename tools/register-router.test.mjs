@@ -1,29 +1,44 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {previewRedirects, acceptanceOrigin} from './build-register-preview.mjs';
-const text=readFileSync(new URL('../public/_redirects',import.meta.url),'utf8');
-const rules=text.split('\n').filter(l=>l.trim()&&!l.trim().startsWith('#')).map(l=>l.trim().split(/\s+/));
-for(const from of ['/register','/register/']){
- const matches=rules.filter(r=>r[0]===from);assert.equal(matches.length,1);
- assert.deepEqual(matches[0],[from,'https://championlifefwb.com/outreach-register.html?campaign=huntsville-2026','302!']);
+import {previewRedirects, expectedDestinations} from './build-register-preview.mjs';
+
+const source=readFileSync(new URL('../public/_redirects',import.meta.url),'utf8');
+const routes=source.split('\n').map(line=>line.trim()).filter(line=>line&&!line.startsWith('#')).map(line=>line.split(/\s+/));
+const expected=Object.entries(expectedDestinations);
+assert.equal(expected.length,10,'10 exact public entrypoints expected');
+assert.equal(routes.length,expected.length,'No missing, unexpected or duplicate redirect rules');
+for (const [from,destination] of expected) {
+ const matches=routes.filter(rule=>rule[0]===from);
+ assert.equal(matches.length,1,'Exactly one redirect for '+from);
+ assert.deepEqual(matches[0],[from,destination,'302!'],'Exact Minden destination for '+from);
 }
-for(const from of ['/go','/go/'])assert.deepEqual(rules.find(r=>r[0]===from),[from,'https://championlifefwb.com/bessemer/','302!']);
-for(const [from,destination] of [
- ['/minden/register','https://championlifefwb.com/minden/register/'],
- ['/minden/register/','https://championlifefwb.com/minden/register/'],
- ['/minden/go','https://championlifefwb.com/minden/'],
- ['/minden/go/','https://championlifefwb.com/minden/']
-]) assert.deepEqual(rules.find(r=>r[0]===from),[from,destination,'302!']);
-assert.equal(rules.length,8);assert(!text.includes('301')&&!text.includes('*'));
-const svg=readFileSync(new URL('../collateral/register/sowgo-register-qr.svg',import.meta.url),'utf8');assert(svg.includes('<svg')&&svg.includes('<path'));
-console.log('PASS exact /register and /register/ temporary destinations; /go preserved; no wildcard/permanent redirects; QR collateral present');
-for (const context of ['deploy-preview', 'branch-deploy']) {
- const preview = previewRedirects(text, context);
- for (const from of ['/register', '/register/']) assert(preview.includes(`${from}    ${acceptanceOrigin}/outreach-register.html?campaign=huntsville-2026    302!`));
- assert.equal(preview.split('\n').filter(l=>!l.startsWith('/register')).join('\n').trim(), text.split('\n').filter(l=>!l.startsWith('/register')).join('\n').trim());
- assert.equal(readFileSync(new URL('../public/_redirects',import.meta.url),'utf8'),text);
+assert(!source.includes('301')&&!source.includes('*'),'No permanent or wildcard redirects');
+const svg=readFileSync(new URL('../collateral/register/sowgo-register-qr.svg',import.meta.url),'utf8');
+assert(svg.includes('<svg')&&svg.includes('<path'),'Existing printed register QR stays in source');
+
+const review='https://synthetic-minden-review--championlifechurch.netlify.app';
+for (const context of ['deploy-preview','branch-deploy']) {
+ const result=previewRedirects(source,context,review);
+ const transformed=result.split('\n').map(line=>line.trim()).filter(line=>line.startsWith('/')).map(line=>line.split(/\s+/));
+ assert.equal(transformed.length,10);
+ for(const [from,destination] of expected)
+  assert.deepEqual(transformed.find(rule=>rule[0]===from),
+   [from,review+new URL(destination).pathname,'302!']);
+ assert.equal(readFileSync(new URL('../public/_redirects',import.meta.url),'utf8'),source,
+   'Source redirect artifact unchanged by preview generation');
 }
-for(const context of ['production','dev','',undefined]) assert.throws(()=>previewRedirects(text,context));
-assert.throws(()=>previewRedirects(text.replaceAll('https://championlifefwb.com/outreach-register.html','https://example.org/outreach-register.html'),'deploy-preview'));
-assert.throws(()=>previewRedirects(text.replace(/^\/register\/\s.*$/m,''),'deploy-preview'));
-console.log('PASS isolated preview destinations, production-context rejection, unchanged source and /go, malformed/missing destination rejection');
+for(const badContext of ['production','dev','',undefined])
+ assert.throws(()=>previewRedirects(source,badContext,review),/Preview context required/);
+for(const badOrigin of [undefined,'','http://synthetic-minden-review--championlifechurch.netlify.app',
+ 'https://example.org','https://synthetic-minden-review--championlifechurch.netlify.app.evil.org',
+ 'https://synthetic-minden-review--championlifechurch.netlify.app/other',
+ 'https://user:pass@synthetic-minden-review--championlifechurch.netlify.app'])
+ assert.throws(()=>previewRedirects(source,'deploy-preview',badOrigin));
+assert.throws(()=>previewRedirects(source.replace('https://championlifefwb.com/minden/',
+ 'https://championlifefwb.com/huntsville/'),'deploy-preview',review),/drift/);
+assert.throws(()=>previewRedirects(source.replace(/^\/registration\/\s+.*$/m,''),
+ 'deploy-preview',review),/Missing/);
+assert.throws(()=>previewRedirects(source+ '\n/go   https://championlifefwb.com/minden/   302!\n',
+ 'deploy-preview',review),/duplicate/);
+console.log('PASS: 10 source Minden redirects and 10 mapped preview aliases; original printed QR file preserved');
+console.log('PASS: preview requires verified exact origin; production, drift, duplicates and legacy Huntsville targets reject');
