@@ -8,7 +8,13 @@ for(const from of ['/register','/register/']){
  assert.deepEqual(matches[0],[from,'https://championlifefwb.com/outreach-register.html?campaign=huntsville-2026','302!']);
 }
 for(const from of ['/go','/go/'])assert.deepEqual(rules.find(r=>r[0]===from),[from,'https://championlifefwb.com/bessemer/','302!']);
-assert.equal(rules.length,4);assert(!text.includes('301')&&!text.includes('*'));
+for(const [from,destination] of [
+ ['/minden/register','https://championlifefwb.com/minden/register/'],
+ ['/minden/register/','https://championlifefwb.com/minden/register/'],
+ ['/minden/go','https://championlifefwb.com/minden/'],
+ ['/minden/go/','https://championlifefwb.com/minden/']
+]) assert.deepEqual(rules.find(r=>r[0]===from),[from,destination,'302!']);
+assert.equal(rules.length,8);assert(!text.includes('301')&&!text.includes('*'));
 const svg=readFileSync(new URL('../collateral/register/sowgo-register-qr.svg',import.meta.url),'utf8');assert(svg.includes('<svg')&&svg.includes('<path'));
 console.log('PASS exact /register and /register/ temporary destinations; /go preserved; no wildcard/permanent redirects; QR collateral present');
 for (const context of ['deploy-preview', 'branch-deploy']) {
