@@ -9,3 +9,10 @@
 # RELEASE CANDIDATE ONLY: merge/cutover requires native hosted acceptance and approval.
 /register    https://championlifefwb.com/outreach-register.html?campaign=huntsville-2026    302!
 /register/   https://championlifefwb.com/outreach-register.html?campaign=huntsville-2026    302!
+
+# Minden-only direct campaign links. Draft, not a shared /register or /go switch.
+# Native Minden campaign must be active before these shortcuts are published.
+/minden/register    https://championlifefwb.com/minden/register/    302!
+/minden/register/   https://championlifefwb.com/minden/register/    302!
+/minden/go          https://championlifefwb.com/minden/             302!
+/minden/go/         https://championlifefwb.com/minden/             302!
