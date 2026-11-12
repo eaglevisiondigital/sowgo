@@ -1,30 +1,50 @@
-# Minden route preparation — SOURCE-ONLY DRAFT
+# Minden shared QR router cutover — DRAFT, NOT LIVE
 
-Minden's canonical pages and guarded backend are prepared in the separate
-Champion Life source-only draft PR #149:
+Owner direction (November 12, 2026): after separate acceptance and release
+approval, send these existing public SowGo entry points to Minden:
+
+| SowGo path | Exact destination |
+|---|---|
+| `/registration`, `/registration/` | `https://championlifefwb.com/minden/register/` |
+| `/register`, `/register/` (existing printed registration QR) | same Minden native preregistration |
+| `/go`, `/go/` (existing printed decision QR) | `https://championlifefwb.com/minden/` |
+| `/minden/register`, `/minden/register/` | same Minden native preregistration |
+| `/minden/go`, `/minden/go/` | same Minden decision / free-book page |
+
+The destination decision page offers the free **King Kind** reader and
+free online discipleship resources, as prepared in the separate Champion Life
+source-only draft PR #149:
 https://github.com/eaglevisiondigital/championlife/pull/149
 
-New **non-overlapping** SowGo shortcuts:
-- `/minden/register` and `/minden/register/` -> native Minden household
-  pre-registration at `https://championlifefwb.com/minden/register/`.
-- `/minden/go` and `/minden/go/` -> Minden decision and free King Kind
-  book at `https://championlifefwb.com/minden/`.
+The source uses explicit `302!` temporary redirects. Neither the printed QR
+destination text nor any QR artwork changes. Previous Huntsville links cease
+to be the **shared router's** destination only after authorized cutover;
+historical `/huntsville/` pages and records remain untouched.
 
-Each uses a temporary 302! redirect, without changing current shared
-`/register`, `/register/`, `/go`, `/go/` or any previously printed QR.
-These four additional shortcuts are held in an unmerged draft until the
-Champion Life Minden routes and their backend are fully published and
-genuinely tested.
+## Safety and preview checks
 
-**Before live activation:** exact approved event details and Louisiana
-waiver; activated campaign; verified genuine household submissions,
-decisions, assigned staff and city-specific reporting; audited fallback
-and privacy/consent controls; QR scans and browser tests; final owner
-authorization of SowGo + Champion Life production deployments. If a
-future campaign needs the **shared** permanent QR route re-pointed,
-that is a separate exact-scope release decision. Do not silently
-redirect today's Huntsville or Bessemer printed materials.
+- This draft is NOT merged or deployed. Existing live routing is not asserted
+  here. No database/merchant/tenant or login operation performed.
+- `tools/build-register-preview.mjs` deliberately refuses to run unless
+  `MINDEN_CHAMPIONLIFE_PREVIEW_ORIGIN` is set to an exact verified HTTPS
+  `<name>--championlifechurch.netlify.app` preview origin. Do NOT use the
+  historical Huntsville preview or guess a new URL. This variable is a
+  nonsecret reviewed preview binding, not a production authorization.
+- Preview builder maps all 10 exact SowGo routes to that one preview origin,
+  preserving path. It rejects missing, duplicate or drifting destinations and
+  production context. No live fallback substitution is implied.
+- Unit contract: `node tools/register-router.test.mjs`.
+- Before cutover, confirm the chosen Minden destination for BOTH QR campaigns,
+  scan physical QR codes, test slash and no-slash forms and mobile browsers,
+  and establish owner-approved fallback/rollback for routing.
 
-SowGo does not host a second registration form, backend or donor database.
-No credentials, donations, subscribers, or direct SQL are added.
-Source check: `node tools/register-router.test.mjs`.
+## Remaining shared launch gates
+
+Confirm Minden Family Fun Day event date/time, location/host and approved
+Louisiana-specific waiver/media consent; accepted campaign migration and
+registration activation; genuine end-to-end household and decision submissions;
+verified city-scoped staff role, reports and signed-in Auth/RLS; and separate
+Champion Life and SowGo production release authorization.
+
+Do not merge the SowGo redirects ahead of those requirements. Do not delete
+Huntsville historical registrations or create another donor/People database.
