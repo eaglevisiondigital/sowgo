@@ -40,8 +40,11 @@ historical `/huntsville/` pages and records remain untouched.
 
 ## Remaining shared launch gates
 
-Confirm Minden Family Fun Day event date/time, location/host and approved
-Louisiana-specific waiver/media consent; accepted campaign migration and
+Minden Family Fun Day is Saturday, December 19, 2026 at Victory Park,
+Park Highway, Minden, LA 71055. On-site registration begins 11 AM CST;
+Family Fun Day noon–2 PM, with 100 bicycles being given away (individual
+eligibility and distribution rules remain unapproved). Confirm the exact
+legal local host and approved Louisiana-specific waiver/media consent; accepted campaign migration and
 registration activation; genuine end-to-end household and decision submissions;
 verified city-scoped staff role, reports and signed-in Auth/RLS; and separate
 Champion Life and SowGo production release authorization.
