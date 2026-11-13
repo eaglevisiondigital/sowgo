@@ -1,11 +1,21 @@
-# Permanent branded outreach QR router.
-# The physical QR encodes https://sowgo.org/go and never needs to change.
-# Current active campaign: Huntsville / City Hangout 2026.
-# Use a temporary redirect so browsers/QR scanners do not cache a campaign destination permanently.
-/go    https://championlifefwb.com/huntsville/    302!
-/go/   https://championlifefwb.com/huntsville/    302!
+# SowGo permanent branded outreach QR routers.
+# Minden, Louisiana CUTOVER CANDIDATE ONLY. Unmerged draft: NOT LIVE.
+# Printed QR destinations remain sowgo.org/register and sowgo.org/go.
+# These 302! destinations require separately authorized Champion Life acceptance,
+# legal event/waiver signoff and a specific SowGo production release approval.
 
-# Permanent preregistration QR router; independent from /go.
-# RELEASE CANDIDATE ONLY: merge/cutover requires native hosted acceptance and approval.
-/register    https://championlifefwb.com/outreach-register.html?campaign=huntsville-2026    302!
-/register/   https://championlifefwb.com/outreach-register.html?campaign=huntsville-2026    302!
+# Minden Family Fun Day pre-registration: all equivalent public entrypoints.
+/registration    https://championlifefwb.com/minden/register/    302!
+/registration/   https://championlifefwb.com/minden/register/    302!
+/register        https://championlifefwb.com/minden/register/    302!
+/register/       https://championlifefwb.com/minden/register/    302!
+
+# Minden decisions: free King Kind book and online discipleship resources.
+/go              https://championlifefwb.com/minden/             302!
+/go/             https://championlifefwb.com/minden/             302!
+
+# Campaign-specific aliases remain available without changing printed QR bytes.
+/minden/register  https://championlifefwb.com/minden/register/    302!
+/minden/register/ https://championlifefwb.com/minden/register/    302!
+/minden/go        https://championlifefwb.com/minden/             302!
+/minden/go/       https://championlifefwb.com/minden/             302!
