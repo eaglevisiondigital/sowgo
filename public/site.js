@@ -6,10 +6,10 @@
   const arrow = '<svg aria-hidden="true"><use href="assets/icons.svg#arrow"/></svg>';
   const today = new Intl.DateTimeFormat('en-CA', { timeZone:'America/Chicago', year:'numeric', month:'2-digit', day:'2-digit' }).format(new Date());
   const isPast = event => Boolean(event.end && event.end < today);
-  const allowedSignup = value => {try {const u=new URL(value);return u.protocol==='https:' && u.hostname==='form.jotform.com';}catch{return false;}};
+  const allowedSignup = (value,event) => {try {const u=new URL(value);return (u.protocol==='https:' && u.hostname==='form.jotform.com') || (event.id==='minden-2026' && u.href==='https://championlifefwb.com/minden-serve');}catch{return false;}};
   function signupAction(event) {
     if (isPast(event) || event.status === 'closed') return '<span class="button signup-unavailable">Registration Closed</span>';
-    if (event.status === 'open' && allowedSignup(event.signup)) return `<a class="button button-primary" href="${escapeHTML(event.signup)}" target="_blank" rel="noopener noreferrer">Team Sign Up ${arrow}</a>`;
+    if (event.status === 'open' && allowedSignup(event.signup,event)) return `<a class="button button-primary" href="${escapeHTML(event.signup)}" target="_blank" rel="noopener noreferrer">${event.id==='minden-2026'?'Apply to Serve':'Team Sign Up'} ${arrow}</a>`;
     return '<span class="button signup-unavailable">Registration Details Soon</span>';
   }
   function renderCard(event) {
