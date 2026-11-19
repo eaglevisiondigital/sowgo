@@ -1,0 +1,22 @@
+name: Partner and sowing boundaries
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  partner:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --ignore-scripts --prefix tools/tests
+      - run: NODE_PATH="$PWD/tools/tests/node_modules" node tools/partner-page.test.cjs
+      - run: NODE_PATH="$PWD/tools/tests/node_modules" node tools/sowing-page.test.cjs
+      - run: node tools/register-router.test.mjs
+      - run: git diff --check

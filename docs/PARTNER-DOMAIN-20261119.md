@@ -1,0 +1,11 @@
+# SowGo partner page — staged release
+
+The owner authorized the new /partner/ destination as a prerequisite to the Champion Life Outreach update. This first stage adds the page without changing existing partnership links; cutover follows genuine primary-domain verification.
+
+The public form JS/CSS are byte-exact copies of Champion Life main d6a97b1 assets/js/outreach-partner.js and assets/css/outreach-partner.css. A small standalone bootstrap invokes the existing mount API with fixed SowGo presentation, ignoring brand query overrides. Fields, explanations, validation, challenge action, request/replay keys, shared outreach-partner-submit endpoint, organization ownership, accepted===true response gate,500ms redirect and backup continuation remain unchanged. Both successful paths use https://sowgo.org/sow/. No Netlify form, new database, Auth user, marketing consent or payment integration is added.
+
+The complete production build copies public/ into dist-public and supplies only the existing public Supabase config and OUTREACH_PUBLIC_SITE_KEY. That nonsecret build key is configured on ACTIVE sowgosite, not unused sowgo. The production compiler rejects missing/dummy keys and nonproduction contexts. Source and Deploy Preview/branch copies keep partner config null and never fall back to production intake. Registration preview routing and historical QR destinations remain unchanged.
+
+Only partner document routes receive the scoped submission/Turnstile CSP; existing global protections and /sow/ GiveHub policy are preserved. Exact hosted header precedence, widget domain authorization, real submission and duplicate behavior require hosted verification. Partner access to the existing production function is handled by a separately tested additive partner-only policy, preserving its existing environment values and every other intake function. No wildcard CORS or preview origin is allowed.
+
+Local validation:197 standalone branding/fields/outcome/duplicate/compiler/preview checks and136 existing sowing/context/asset/navigation checks PASS using fictional service responses; no real submission, email or payment. Preview/production IDs, primary-domain results and final cutover are recorded after release. Synthetic tests do not establish genuine Turnstile/persistence acceptance.
