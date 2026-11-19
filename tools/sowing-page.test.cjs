@@ -26,7 +26,10 @@ check(!home.window.document.querySelector('#sow-dialog'),'old external giving mo
 check(!read('public/site.js').includes('data-sow-event'),'no modal interception prevents normal sow navigation');
 for(const element of home.window.document.querySelectorAll('a'))check(!element.href.includes('outreach-giving'),'no Champion Life giving link remains');
 const oldConfig={};require('node:vm').runInNewContext(execFileSync('git',['show',base+':public/site-data.js'],{cwd:root,encoding:'utf8'}),{window:oldConfig});
-const current=JSON.parse(JSON.stringify(home.window.SOWGO_CONFIG));const original=JSON.parse(JSON.stringify(oldConfig.SOWGO_CONFIG));delete current.sowUrl;delete original.sowUrl;assert.deepEqual(current,original);checks++;
+const current=JSON.parse(JSON.stringify(home.window.SOWGO_CONFIG));const original=JSON.parse(JSON.stringify(oldConfig.SOWGO_CONFIG));delete current.sowUrl;delete original.sowUrl;delete current.partnerUrl;delete original.partnerUrl;assert.deepEqual(current,original);checks++;
+check(home.window.SOWGO_CONFIG.partnerUrl==='/partner/','partnership remains on SowGo');
+check(home.window.document.querySelectorAll('a[href="/partner/"]').length===5,'all partnership CTAs use the same-site form');
+check(!home.window.document.querySelector('a[href="/partner/"][target="_blank"]'),'same-site partnership has normal navigation');
 check(read('public/_redirects')===execFileSync('git',['show',base+':public/_redirects'],{cwd:root,encoding:'utf8'}),'QR and attendee registration redirects unchanged');
 for(const query of ['', '?outreach=minden-2026','?outreach=unknown','?outreach=%3Cimg%20src%3Dx%20onerror%3Dalert(1)%3E','?outreach=https%3A%2F%2Fevil.example']){
  const page=setup('public/sow/index.html','https://sowgo.org/sow/'+query);const w=page.window;w.eval(read('public/sow/sow.js'));
