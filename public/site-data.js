@@ -6,7 +6,7 @@ window.SOWGO_CONFIG = Object.freeze({
   mode: 'review',
   domain: 'sowgo.org',
   snapshotDate: '2026-10-01',
-  partnerUrl: 'https://championlifefwb.com/outreach-partner.html?brand=sowgo',
+  partnerUrl: '/partner/',
   sowUrl: '/sow/',
   discipleshipUrl: 'https://championlifefwb.com/getting-a-grip.html',
   outreachUrl: 'https://championlifefwb.com/outreach#upcoming',
