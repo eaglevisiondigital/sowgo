@@ -1,7 +1,7 @@
 [build]
-  publish = "public"
-  command = ""
-# The complete approved static website is committed in public/.
+  publish = "dist-public"
+  command = "node tools/build-partner-site.mjs"
+# The complete static source remains in public/; production adds only public partner settings.
 # No package installation, archive download, functions, or database connection is required.
 # Keep this deployment separate from Champion Life.
 
