@@ -29,3 +29,9 @@ New-page preview is prepared for the user's mockup-first review. Production rele
 Focused check: with jsdom available on NODE_PATH, run `node tools/sowing-page.test.cjs`. Also run `node --check public/site.js`, `node --check public/site-data.js`, `node --check public/sow/sow.js`, and the existing preview build. The historical register-router test still expects the pre-existing Bessemer `/go` destination; current main uses Huntsville. Do not change the QR destination to satisfy that stale assertion.
 
 Hosted page, payment-embed, responsive and screenshot results are recorded after preview inspection. Real donation acceptance remains untested.
+
+## Focused review revision
+
+On November 19 the user approved the remainder of the design and requested that the payment-symbol block and its explanatory note move below the giving form. The block now follows the unchanged GiveHub iframe and precedes form help, with a top divider and 20px of spacing. Short titles, labels and actions use initial capitals; full-sentence messaging and explanations remain in sentence case. The outreach reference label follows the same capitalization rule.
+
+The prior hosted preview was inspected at desktop, tablet and narrow phone CSS widths (1363, 779 and 340px), including mobile navigation, the internal event link and the embedded form through its verification step. No donor identity or code was submitted. The revision preserves the iframe, links, images, addresses, responsive breakpoints and all other approved content. Current revision validation uses independent source review and the hosted Netlify build; a fresh browser screenshot is not available in the present runtime. This remains a preview update, with the companion partner-form change prepared separately.

@@ -12,5 +12,5 @@
   // select a fund, or pass donor details based on query-string values.
   const reference=new URLSearchParams(location.search).get('outreach');
   const event=window.SOWGO_CONFIG?.events?.find(item=>item.id===reference);
-  if(event){document.getElementById('outreach-context-title').textContent='Outreach reference: '+event.title;document.getElementById('outreach-context').hidden=false;}
+  if(event){document.getElementById('outreach-context-title').textContent='Outreach Reference: '+event.title;document.getElementById('outreach-context').hidden=false;}
 })();
