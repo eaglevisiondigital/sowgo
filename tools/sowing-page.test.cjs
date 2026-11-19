@@ -46,7 +46,7 @@ const page=new JSDOM(read('public/sow/index.html')).window.document;
 for(const el of page.querySelectorAll('[src],link[href]')){
  const value=el.getAttribute('src')||el.getAttribute('href');if(value.startsWith('/'))check(existsSync(resolve(root,'public',value.slice(1))),'asset exists: '+value);
 }
-check(page.querySelector('img[src*="accepted-cards"]').alt==='Discover, Visa, Mastercard, and American Express','payment marks described accessibly');
+check(page.querySelector('img[src*="accepted-cards"]').alt==='American Express, Mastercard, Visa, and Discover','payment marks described accessibly');
 const headers=read('public/_headers');
 check(headers.includes('frame-src https://www.community.givehub.com;'),'only supplied frame origin permitted');
 for(const token of ["script-src 'self'","connect-src 'none'","frame-ancestors 'none'","X-Frame-Options: DENY"])check(headers.includes(token),'retained protection: '+token);
