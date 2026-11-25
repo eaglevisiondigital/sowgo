@@ -1,11 +1,14 @@
 # Permanent branded outreach QR router.
 # The physical QR encodes https://sowgo.org/go and never needs to change.
-# Current active campaign: Huntsville / City Hangout 2026.
+# Interim next steps: public resources only; no outreach response collection.
 # Use a temporary redirect so browsers/QR scanners do not cache a campaign destination permanently.
-/go    https://championlifefwb.com/huntsville/    302!
-/go/   https://championlifefwb.com/huntsville/    302!
+/go    /next-steps/    302!
+/go/   /next-steps/    302!
 
 # Permanent preregistration QR router; independent from /go.
-# RELEASE CANDIDATE ONLY: merge/cutover requires native hosted acceptance and approval.
-/register    https://championlifefwb.com/outreach-register.html?campaign=huntsville-2026    302!
-/register/   https://championlifefwb.com/outreach-register.html?campaign=huntsville-2026    302!
+# Interim Minden attendee information only; attendee registration is not activated.
+# /registration is an explicit alias for the same attendee information.
+/register       /minden/attendee-info/    302!
+/register/      /minden/attendee-info/    302!
+/registration   /minden/attendee-info/    302!
+/registration/  /minden/attendee-info/    302!
